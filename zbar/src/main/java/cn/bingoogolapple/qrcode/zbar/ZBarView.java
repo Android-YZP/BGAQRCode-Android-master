@@ -127,13 +127,7 @@ public class ZBarView extends QRCodeView {
             // 处理自动缩放和定位点
             boolean isNeedAutoZoom = isNeedAutoZoom(symbol);
             if (isShowLocationPoint() || isNeedAutoZoom) {
-                if (transformToViewCoordinates(symbol.getLocationPoints(), null, isNeedAutoZoom, symData, mBackBitmap)) {
-                    return null;
-                } else {
                     return symData;
-                }
-            } else {
-                return symData;
             }
         }
         return null;

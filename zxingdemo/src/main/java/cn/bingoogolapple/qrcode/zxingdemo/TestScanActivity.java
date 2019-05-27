@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.os.Vibrator;
 import android.provider.MediaStore;
@@ -41,11 +42,12 @@ public class TestScanActivity extends AppCompatActivity implements QRCodeView.De
 
     private ZXingView mZXingView;
     private ImageView imageView;
+    private boolean isStartSpot = false;
 
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,  WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_test_scan);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
@@ -83,13 +85,26 @@ public class TestScanActivity extends AppCompatActivity implements QRCodeView.De
 
     @Override
     public void onScanQRCodeSuccess(String result, ScanResult scanResult) {
-        Log.i(TAG, "result:" + result);
-        setTitle("扫描结果为：" + result);
-        vibrate();
-        imageView.setImageBitmap(scanResult.getBitmap());
-//        mZXingView.startSpot(); // 开始识别
-        saveBitmap(scanResult.getBitmap());
-        mZXingView.stopSpot();
+        if (!result.substring(0,2).equals("69")){
+            mZXingView.startSpot(); // 开始识别
+            return;
+        }
+        //避免相机识别太快
+        if (isStartSpot) {
+            Log.i(TAG, "result:" + result);
+            vibrate();
+            imageView.setImageBitmap(scanResult.getBitmap());
+            mZXingView.startSpot(); // 开始识别
+            saveBitmap(scanResult.getBitmap());
+        } else {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    isStartSpot = true;
+                    mZXingView.startSpot(); // 开始识别
+                }
+            }, 3000);
+        }
     }
 
     private final String SD_PATH = Environment.getExternalStorageDirectory().getPath() + "/OA头像/";
@@ -130,10 +145,6 @@ public class TestScanActivity extends AppCompatActivity implements QRCodeView.De
         // 最后通知图库更新
         sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + savePath + fileName)));
     }
-
-
-
-
 
 
     @Override
