@@ -419,7 +419,7 @@ public abstract class QRCodeView extends RelativeLayout implements Camera.Previe
         }
     }
 
-    void onScanBoxRectChanged(Rect rect) {
+    public void onScanBoxRectChanged(Rect rect) {
         mCameraPreview.onScanBoxRectChanged(rect);
     }
 

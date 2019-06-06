@@ -60,7 +60,7 @@ public class TestScanActivity extends AppCompatActivity implements QRCodeView.De
     protected void onStart() {
         super.onStart();
 
-        mZXingView.startCamera(); // 打开后置摄像头开始预览，但是并未开始识别
+        mZXingView.startCamera(); // 打开后置摄像头开始 预览，但是并未开始识别
 //        mZXingView.startCamera(Camera.CameraInfo.CAMERA_FACING_FRONT); // 打开前置摄像头开始预览，但是并未开始识别
 
         mZXingView.startSpotAndShowRect(); // 显示扫描框，并开始识别

@@ -137,7 +137,6 @@ public class BGAQRCodeUtil {
 
     /**
      * 计算对焦和测光区域
-     *
      * @param coefficient        比率
      * @param originFocusCenterX 对焦中心点X
      * @param originFocusCenterY 对焦中心点Y

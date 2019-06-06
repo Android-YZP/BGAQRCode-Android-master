@@ -309,7 +309,7 @@ public class ScanBoxView extends View {
             if (mCornerDisplayType == 1) {
                 canvas.drawLine(mFramingRect.left - mHalfCornerSize, mFramingRect.top, mFramingRect.left - mHalfCornerSize + mCornerLength, mFramingRect.top,
                         mPaint);
-                canvas.drawLine(mFramingRect.left, mFramingRect.top - mHalfCornerSize+20, mFramingRect.left, mFramingRect.top - mHalfCornerSize + mCornerLength,
+                canvas.drawLine(mFramingRect.left, mFramingRect.top - mHalfCornerSize + 20, mFramingRect.left, mFramingRect.top - mHalfCornerSize + mCornerLength,
                         mPaint);
                 canvas.drawLine(mFramingRect.right + mHalfCornerSize, mFramingRect.top, mFramingRect.right + mHalfCornerSize - mCornerLength, mFramingRect.top,
                         mPaint);
@@ -561,10 +561,10 @@ public class ScanBoxView extends View {
             float newHalfWidth = halfWidth * ratio;
             float newHalfHeight = halfHeight * ratio;
 
-            rect.left = (int) (centerX - newHalfWidth)-80;
-            rect.right = (int) (centerX + newHalfWidth)-80;
-            rect.top = (int) (centerY - newHalfHeight)-80;
-            rect.bottom = (int) (centerY + newHalfHeight)-80;
+            rect.left = (int) (centerX - newHalfWidth) - 80;
+            rect.right = (int) (centerX + newHalfWidth) - 80;
+            rect.top = (int) (centerY - newHalfHeight) - 80;
+            rect.bottom = (int) (centerY + newHalfHeight) - 80;
             return rect;
         } else {
             return null;
